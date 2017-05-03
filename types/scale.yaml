@@ -1,0 +1,50 @@
+policy_types:
+  scale_out_type:
+    source: policies/scale_out.clj
+    properties:
+      policy_operates_on_group:
+        default: true
+      service_selector:
+        description: regular expression that selects the metric to be measured
+        default: ".*"
+      moving_window_size:
+        description: the moving window for individual sources in secs
+        default: 1
+      scale_threshold:
+        description: the value to trigger scaling over aggregrated moving values
+      scale_limit:
+        description: scaling limit
+        default: 10
+      scale_direction:
+        description: scale up ('<') or scale down ('>')
+        default: '<'
+      cooldown_time:
+        description: the time to wait before evaluating again after a scale
+        default: 60
+      stability_time:
+        default: 60
+
+  scale_in_type:
+    source: policies/scale_in.clj
+    properties:
+      policy_operates_on_group:
+        default: true
+      service_selector:
+        description: regular expression that selects the metric to be measured
+        default: ".*"
+      moving_window_size:
+        description: the moving window for individual sources in secs
+        default: 10
+      scale_threshold:
+        description: the value to trigger scaling over aggregrated moving values
+      scale_limit:
+        description: scaling limit
+        default: 10
+      scale_direction:
+        description: scale up ('<') or scale down ('>')
+        default: '>'
+      cooldown_time:
+        description: the time to wait before evaluating again after a scale
+        default: 60
+      stability_time: 
+        default: 60
